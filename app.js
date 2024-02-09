@@ -1,16 +1,15 @@
 const express = require("express");
 
-require('dotenv').config();
 const { auth } = require("express-oauth2-jwt-bearer");
 const errorHandler = require("./src/middlewares/errorHandler");
 
-
+//carga las variables de entorno .env
 require('dotenv').config();
 
 // Configuracion Middleware con el Servidor de Autorización 
 const autenticacion = auth({
-  audience: process.env.OAUTH_AUDIENCE,
-  issuerBaseURL: process.env.OAUTH_URL,
+  audience: process.env.OAUTH_AUDIENCE, //http://localhost:3000/api/productos,
+  issuerBaseURL: process.env.OAUTH_URL, //https://dev-utn-frc-iaew.auth0.com/
   tokenSigningAlg: "RS256",
 });
 
@@ -22,7 +21,7 @@ app.use(express.json());
 const librosRouter = require("./src/routes/libros");
 
 //Configuramos el middleware de autenticacion
-app.use("/api/libros", autenticacion,  librosRouter);
+app.use("/api/biblioteca", autenticacion, librosRouter);
 
 app.use(errorHandler);
 
@@ -30,4 +29,3 @@ app.listen(3000, () => {
   console.log("Servidor iniciado en el puerto 3000");
 });
 
-module.exports = app;
