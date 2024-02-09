@@ -7,11 +7,6 @@ mongoose.connect(process.env.MONGO_DB, {
   useNewUrlParser: true,
 });
   
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'Error de conexión:'));
-db.once('open', () => {
-  console.log('Conexión exitosa a MongoDB');
-});
 
 const LibroSchema = new mongoose.Schema({
   titulo: String,
