@@ -8,6 +8,7 @@ const errorHandler = require("./middlewares/errorHandler");
 //carga las variables de entorno .env
 require('dotenv').config();
 
+
 // Configuracion Middleware con el Servidor de Autorización 
 const autenticacion = auth({
   audience: process.env.OAUTH_AUDIENCE, //http://localhost:3000/api/productos,
